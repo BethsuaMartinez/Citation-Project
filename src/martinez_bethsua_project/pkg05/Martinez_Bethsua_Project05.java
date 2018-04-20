@@ -6,7 +6,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import martinez_bethsua_project.pkg05.MVC.CitationController;
-import martinez_bethsua_project.pkg05.MVC.CitationModel;
 import martinez_bethsua_project.pkg05.MVC.CitationModelDatabase;
 import martinez_bethsua_project.pkg05.MVC.CitationView;
 

@@ -1,12 +1,6 @@
 package martinez_bethsua_project.pkg05.MVC;
 
 import database.DatabaseCitationHelper;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import martinez_bethsua_project.pkg05.DataTypes.ParkingTicketCitation;
 
@@ -16,7 +10,7 @@ import martinez_bethsua_project.pkg05.DataTypes.ParkingTicketCitation;
  */
 public class CitationModelDatabase {
 
-    ArrayList<ParkingTicketCitation> citationsDatabase;
+   ArrayList<ParkingTicketCitation> citationsDatabase;
     ParkingTicketCitation currentCitation;
 
     int indexCounter = 0;
@@ -29,14 +23,6 @@ public class CitationModelDatabase {
         citationsDatabase = list;
     }
 
-    public void save(String path) throws FileNotFoundException, IOException {
-        FileOutputStream fileOut
-                = new FileOutputStream(path);
-        ObjectOutputStream out = new ObjectOutputStream(fileOut);
-        out.writeObject(citationsDatabase);
-        out.close();
-        fileOut.close();
-    }
 
     public static CitationModelDatabase restore() {
         return new CitationModelDatabase(DatabaseCitationHelper.getInstance().getCitations());

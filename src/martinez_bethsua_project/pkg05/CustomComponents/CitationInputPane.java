@@ -1,5 +1,6 @@
 package martinez_bethsua_project.pkg05.CustomComponents;
 
+import database.DatabaseCitationHelper;
 import java.util.ArrayList;
 import javafx.geometry.Insets;
 import javafx.scene.control.CheckBox;
@@ -642,10 +643,13 @@ public class CitationInputPane extends GridPane {
     }
 
     public boolean validateFields() {
-        if (this.licenseNTF.getText().isEmpty() || this.vehicleModelTF.getText().isEmpty()) {
+        if (this.citationNumTF.getText().isEmpty()) {
             return false;
         }
-        return true;
+        
+        
+        
+        return !DatabaseCitationHelper.getInstance().containCitation(this.citationNumTF.getText());
     }
 
     /**
