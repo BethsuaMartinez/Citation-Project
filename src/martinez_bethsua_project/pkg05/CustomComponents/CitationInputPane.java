@@ -33,6 +33,7 @@ public class CitationInputPane extends GridPane {
     private Label location = new Label("Location:");
     private Label issuedBy = new Label("Issued By:");
     private Label paidLabel = new Label("");
+    private Label citationNum = new Label("Citation ID");
 
     private TextField btnOther = new TextField();
     private TextField licenseNTF = new TextField();
@@ -45,6 +46,7 @@ public class CitationInputPane extends GridPane {
     private TextField timeTF = new TextField();
     private TextField locationTF = new TextField();
     private TextField issuedByTF = new TextField();
+    private TextField citationNumTF = new TextField();
 
     
     //check boxes for the options on violation Type
@@ -62,7 +64,7 @@ public class CitationInputPane extends GridPane {
     ArrayList<CheckBox> checkboxes = new ArrayList<>();
 
     public ParkingTicketCitation getTicketCitation() {
-        return new ParkingTicketCitation(licenseNTF.getText(), stateTF.getText(), permitNFT.getText(), vehicleModelTF.getText(), vehicleColorTF.getText(), getInfractions(), dateTF.getText(), timeTF.getText(), locationTF.getText(), issuedByTF.getText(), violationTypeTF.getText(), false);
+        return new ParkingTicketCitation( Integer.parseInt(citationNumTF.getText()), licenseNTF.getText(), stateTF.getText(), permitNFT.getText(), vehicleModelTF.getText(), vehicleColorTF.getText(), getInfractions(), dateTF.getText(), timeTF.getText(), locationTF.getText(), issuedByTF.getText(), violationTypeTF.getText(), false);
     }
 
     public boolean getPaidStatus() {
@@ -82,6 +84,7 @@ public class CitationInputPane extends GridPane {
         VBox vbox4 = new VBox();
         VBox vbox5 = new VBox();
         VBox vbox6 = new VBox();
+        VBox vbox7 = new VBox();
 
         VBox hbox1 = new VBox();
         VBox hbox2 = new VBox();
@@ -94,6 +97,7 @@ public class CitationInputPane extends GridPane {
         vbox3.getChildren().addAll(permitN, permitNFT);
         vbox4.getChildren().addAll(vehicleModel, vehicleModelTF);
         vbox5.getChildren().addAll(vehicleColor, vehicleColorTF);
+        vbox7.getChildren().addAll(citationNum, citationNumTF);
 
         checkboxes.add(ck1);
         checkboxes.add(ck2);
@@ -120,7 +124,7 @@ public class CitationInputPane extends GridPane {
 
         this.addRow(0, citations, pbox);
         this.addRow(1, vbox1, vbox2, vbox3);
-        this.addRow(2, vbox4, vbox5);
+        this.addRow(2, vbox4, vbox5, vbox7);
         this.addRow(3, vbox6);
         this.addRow(4, hbox1);
         this.addRow(5, hbox2);
@@ -642,6 +646,34 @@ public class CitationInputPane extends GridPane {
             return false;
         }
         return true;
+    }
+
+    /**
+     * @return the citationNum
+     */
+    public Label getCitationNum() {
+        return citationNum;
+    }
+
+    /**
+     * @param citationNum the citationNum to set
+     */
+    public void setCitationNum(Label citationNum) {
+        this.citationNum = citationNum;
+    }
+
+    /**
+     * @return the citationNumTF
+     */
+    public TextField getCitationNumTF() {
+        return citationNumTF;
+    }
+
+    /**
+     * @param citationNumTF the citationNumTF to set
+     */
+    public void setCitationNumTF(TextField citationNumTF) {
+        this.citationNumTF = citationNumTF;
     }
 
 }

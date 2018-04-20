@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class ParkingTicketCitation implements Serializable {
 
   //Parking ticket citation that will be the type of array on citation Model 
+    private int id;
     private String licenseN;
     private String state;
     private String permitN;
@@ -23,8 +24,9 @@ public class ParkingTicketCitation implements Serializable {
     private String otherViolation;
     private boolean ispaid;
 
-    public ParkingTicketCitation(String licenseN, String state, String permitN, String vehicleModel,
+    public ParkingTicketCitation(int id, String licenseN, String state, String permitN, String vehicleModel,
             String vehicleColor, int[] violationType, String date, String time, String location, String issuedBy, String otherViolation, boolean ispaid) {
+        this.id = id;
         this.licenseN = licenseN;
         this.state = state;
         this.permitN = permitN;
@@ -39,6 +41,29 @@ public class ParkingTicketCitation implements Serializable {
         this.ispaid = ispaid;
     }
 
+    
+        public ParkingTicketCitation(int id, String licenseN, String state, String permitN, String vehicleModel,
+            String vehicleColor, String[] violationType, String date, String time, String location, String issuedBy, String otherViolation, boolean ispaid) {
+        this.id = id;
+        this.licenseN = licenseN;
+        this.state = state;
+        this.permitN = permitN;
+        this.vehicleModel = vehicleModel;
+        this.vehicleColor = vehicleColor;
+        
+        this.violationType = new int[violationType.length];
+        for (int i = 0; i < violationType.length; i++) {
+            this.violationType[i] = Integer.parseInt(violationType[i]);
+        }
+
+        this.date = date;
+        this.time = time;
+        this.location = location;
+        this.issuedBy = issuedBy;
+        this.otherViolation = otherViolation;
+        this.ispaid = ispaid;
+    }
+        
     /**
      * @return the getOtherViolation
      */
@@ -133,6 +158,18 @@ public class ParkingTicketCitation implements Serializable {
         return violationType;
     }
 
+        public String getViolationTypeString() {
+        
+        String raw  = "";
+        for (int i = 0; i < getViolationType().length; i++) {
+            raw += getViolationType()[i] + ",";
+        }
+        
+        raw = raw.substring(0, raw.length() -1 );
+         
+        return raw;
+    }
+    
     /**
      * @param violationType the violationType to set
      */
@@ -194,6 +231,20 @@ public class ParkingTicketCitation implements Serializable {
      */
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

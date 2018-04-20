@@ -18,9 +18,9 @@ import martinez_bethsua_project.pkg05.DataTypes.ParkingTicketCitation;
 public class CitationController {
 
     CitationView citationView;
-    CitationModel citationModel;
+    CitationModelDatabase citationModel;
 
-    public CitationController(CitationView citationView, CitationModel citationModel) {
+    public CitationController(CitationView citationView, CitationModelDatabase citationModel) {
         this.citationView = citationView;
         this.citationModel = citationModel;
 
@@ -57,7 +57,7 @@ public class CitationController {
                    citationView.setCitationField(cit);
                 } else {
                     Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Cittation Retrieve Error");
+                    alert.setTitle("Citation Retrieve Error");
                     alert.setHeaderText("No Citations in Database");
                     alert.setContentText("Please Add Citations!");
                     alert.showAndWait();
@@ -68,10 +68,13 @@ public class CitationController {
         citationView.getUpdateBtn().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                ParkingTicketCitation cit = citationView.genetateCitationFromFields();
+                 cit.setId(citationModel.getCurrentTicket().getId());
+                 cit.setIspaid(citationModel.getCurrentTicket().Ispaid());
                 if (citationModel.upateCurrentCitation(citationView.genetateCitationFromFields())) {
                     showMessage("Update Status", "Current Citation Status Update", "Current Citation Has Been Updated");
                 } else {
-                    showMessage("Cittation Retrieve Error", "No Citations in Database", "Please Add Citations, Before trying to update!");
+                    showMessage("Citation Retrieve Error", "No Citations in Database", "Please Add Citations, Before trying to update!");
                 }
             }
         });
@@ -91,7 +94,7 @@ public class CitationController {
                     citationView.setCitationField(cit);
                 } else {
                     Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Cittation Retrieve Error");
+                    alert.setTitle("Citation Retrieve Error");
                     alert.setHeaderText("No Citations in Database");
                     alert.setContentText("Please Add Citations!");
                     alert.showAndWait();
@@ -107,7 +110,7 @@ public class CitationController {
                     citationView.setCitationField(cit);
                 } else {
                     Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Cittation Retrieve Error");
+                    alert.setTitle("Citation Retrieve Error");
                     alert.setHeaderText("No Citations in Database");
                     alert.setContentText("Please Add Citations!");
                     alert.showAndWait();
@@ -123,7 +126,7 @@ public class CitationController {
                     citationView.setCitationField(cit);
                 } else {
                     Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Cittation Retrieve Error");
+                    alert.setTitle("Citation Retrieve Error");
                     alert.setHeaderText("No Citations of Database");
                     alert.setContentText("Please Add Citations!");
                     alert.showAndWait();
@@ -139,7 +142,7 @@ public class CitationController {
                     ParkingTicketCitation generatedCit = citationView.genetateCitationFromFields();
                     citationModel.addCitation(generatedCit);
                 } else {
-                    showMessage("Citation Form Error", "Citation Form Missing Fields", "Please make sure Citation includes atleast \nLicence No and Vehicle Make/Model!");
+                    showMessage("Citation Form Error", "Citation Form Missing Fields or Duplicate Citation Number", "Please make sure Citation includes at least Citation Number is Unique!");
                 }
             }
 
@@ -150,11 +153,11 @@ public class CitationController {
             @Override
             public void handle(ActionEvent event) {
                 
-                try {
-                    citationModel.save("tickets.dat");
-                } catch (IOException ex) {
-                    Logger.getLogger(CitationController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+             //   try {
+             //       citationModel.save("tickets.dat");
+             //   } catch (IOException ex) {
+             //       Logger.getLogger(CitationController.class.getName()).log(Level.SEVERE, null, ex);
+             //   }
                 
                 
                 ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
