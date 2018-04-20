@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  * @author bethsua martinez
  */
-public class ParkingTicketCitation implements Serializable {
+public class ParkingTicketCitation {
 
   //Parking ticket citation that will be the type of array on citation Model 
     private int id;
